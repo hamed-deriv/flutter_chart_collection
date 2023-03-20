@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter_chart_collection/pie_chart.dart';
+import 'package:flutter_chart_collection/models/base_chart_model.dart';
+import 'package:flutter_chart_collection/painters/donut_chart_painter.dart';
 
 void main() => runApp(const App());
 
@@ -13,33 +13,37 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(primarySwatch: Colors.blueGrey),
-        home: const Center(
-          child: PieChart(
-            data: <double>[20, 15, 10, 8, 7, 6, 5, 4, 3, 2],
-            colors: <Color>[
-              Colors.red,
-              Colors.green,
-              Colors.blue,
-              Colors.orange,
-              Colors.purple,
-              Colors.yellow,
-              Colors.teal,
-              Colors.brown,
-              Colors.pink,
-              Colors.grey,
-            ],
-            labels: <String>[
-              'Red',
-              'Green',
-              'Blue',
-              'Orange',
-              'Purple',
-              'Yellow',
-              'Teal',
-              'Brown',
-              'Pink',
-              'Grey',
-            ],
+        home: Center(
+          child: Container(
+            color: Colors.white,
+            width: 100,
+            height: 100,
+            child: CustomPaint(
+              painter: PieChartPainter(
+                <BaseChartModel>[
+                  BaseChartModel(
+                    value: 10,
+                    color: Colors.red,
+                    label: 'Red',
+                  ),
+                  BaseChartModel(
+                    value: 20,
+                    color: Colors.green,
+                    label: 'Green',
+                  ),
+                  BaseChartModel(
+                    value: 30,
+                    color: Colors.blue,
+                    label: 'Blue',
+                  ),
+                  BaseChartModel(
+                    value: 40,
+                    color: Colors.yellow,
+                    label: 'Yellow',
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       );
