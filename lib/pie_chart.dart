@@ -26,6 +26,7 @@ class PieChart extends StatefulWidget {
 
 class _PieChartState extends State<PieChart> {
   int? _selectedIndex;
+  double angle = 0;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -38,16 +39,27 @@ class _PieChartState extends State<PieChart> {
               SizedBox(
                 width: 200,
                 height: 200,
-                child: CustomPaint(
-                  painter: PieChartPainter(
-                    data: widget.data,
-                    colors: widget.colors,
-                    selectedIndex: _selectedIndex,
-                    onItemSelected: (int index) {
-                      setState(() {
-                        _selectedIndex = index;
-                      });
-                    },
+                child: GestureDetector(
+                  onPanUpdate: (DragUpdateDetails details) {
+                    setState(() {
+                      angle -= details.delta.dx * 0.01;
+                      angle += details.delta.dy * 0.01;
+                    });
+                  },
+                  child: Transform.rotate(
+                    angle: angle,
+                    child: CustomPaint(
+                      painter: PieChartPainter(
+                        data: widget.data,
+                        colors: widget.colors,
+                        selectedIndex: _selectedIndex,
+                        onItemSelected: (int index) {
+                          setState(() {
+                            _selectedIndex = index;
+                          });
+                        },
+                      ),
+                    ),
                   ),
                 ),
               ),
