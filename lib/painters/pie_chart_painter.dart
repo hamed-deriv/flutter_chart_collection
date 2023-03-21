@@ -3,14 +3,16 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_chart_collection/models/base_chart_model.dart';
+import 'package:flutter_chart_collection/painters/base_chart_painter.dart';
 
 /// A custom painter for drawing a donut chart.
-class PieChartPainter extends CustomPainter {
+class PieChartPainter extends BaseChartPanePainter {
   /// Initializes a new [PieChartPainter].
-  PieChartPainter(this.data, {this.width = 0.2, this.isDonutChart = true});
-
-  /// The data to be drawn.
-  final List<BaseChartModel> data;
+  PieChartPainter(
+    List<BaseChartModel> data, {
+    this.width = 0.2,
+    this.isDonutChart = true,
+  }) : super(data);
 
   /// The width of the chart.
   ///

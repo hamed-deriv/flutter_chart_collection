@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_chart_collection/models/base_chart_model.dart';
-import 'package:flutter_chart_collection/painters/donut_chart_painter.dart';
+import 'package:flutter_chart_collection/painters/pie_chart_painter.dart';
 
 void main() => runApp(const App());
 
