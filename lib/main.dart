@@ -7,13 +7,18 @@ import 'package:flutter_chart_collection/painters/pie_chart_painter.dart';
 import 'package:flutter_chart_collection/widgets/legend.dart';
 import 'package:flutter_chart_collection/widgets/rotate.dart';
 
-void main() => runApp(App());
+void main() => runApp(const App());
 
 /// The main app widget.
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   /// Creates a new [App] widget.
-  App({Key? key}) : super(key: key);
+  const App({Key? key}) : super(key: key);
 
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
   final List<BaseChartModel> _data = <BaseChartModel>[
     BaseChartModel(
       value: 10,
@@ -37,6 +42,8 @@ class App extends StatelessWidget {
     ),
   ];
 
+  int? _selectedSegment = 0;
+
   @override
   Widget build(BuildContext context) => MaterialApp(
         title: 'Flutter Demo',
@@ -49,12 +56,19 @@ class App extends StatelessWidget {
                   child: Container(
                     width: 150,
                     height: 150,
-                    child: CustomPaint(painter: PieChartPainter(_data)),
+                    child: CustomPaint(
+                      painter: PieChartPainter(
+                        _data,
+                        selectedSegment: _selectedSegment,
+                      ),
+                    ),
                   ),
                 ),
                 Legend(
                   data: _data,
-                  onTap: (int index) => developer.log('${_data[index].label}'),
+                  onTap: (int index) => setState(
+                    () => _selectedSegment = index,
+                  ),
                 ),
               ],
             ),

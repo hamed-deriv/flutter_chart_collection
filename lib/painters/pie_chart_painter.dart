@@ -10,6 +10,7 @@ class PieChartPainter extends BaseChartPanePainter {
   /// Initializes a new [PieChartPainter].
   PieChartPainter(
     List<BaseChartModel> data, {
+    this.selectedSegment,
     this.width = 0.2,
     this.isDonutChart = true,
   }) : super(data);
@@ -25,6 +26,11 @@ class PieChartPainter extends BaseChartPanePainter {
   /// If false, the chart will be drawn as a pie chart.
   /// Defaults to `true`.
   final bool isDonutChart;
+
+  /// The index of the selected segment.
+  ///
+  /// If `null`, no segment will be selected.
+  final int? selectedSegment;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -51,8 +57,13 @@ class PieChartPainter extends BaseChartPanePainter {
         ..strokeWidth = strokeWidth
         ..color = data[i].color;
 
+      final double segmentRadius = i == selectedSegment ? radius * 1.2 : radius;
+
       canvas.drawArc(
-        Rect.fromCircle(center: Offset(centerX, centerY), radius: radius),
+        Rect.fromCircle(
+          center: Offset(centerX, centerY),
+          radius: segmentRadius,
+        ),
         currentAngle,
         angles[i],
         false,
@@ -60,8 +71,8 @@ class PieChartPainter extends BaseChartPanePainter {
       );
 
       final double angleMiddle = currentAngle + (angles[i] / 2);
-      final double x = centerX + (radius * cos(angleMiddle));
-      final double y = centerY + (radius * sin(angleMiddle));
+      final double x = centerX + (segmentRadius * cos(angleMiddle));
+      final double y = centerY + (segmentRadius * sin(angleMiddle));
 
       final TextSpan span = TextSpan(
         text: '${data[i].value}',
