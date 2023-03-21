@@ -63,5 +63,5 @@ class PieChartPainter extends BaseChartPanePainter {
   }
 
   @override
-  bool shouldRepaint(PieChartPainter oldDelegate) => true;
+  bool shouldRepaint(PieChartPainter oldDelegate) => oldDelegate.data != data;
 }

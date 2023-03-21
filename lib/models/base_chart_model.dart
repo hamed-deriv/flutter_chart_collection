@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 /// Base chart model for passing data to the charts.
-class BaseChartModel {
+class BaseChartModel with EquatableMixin {
   /// Initializes a new [BaseChartModel].
   BaseChartModel({
     required this.value,
@@ -17,4 +18,7 @@ class BaseChartModel {
 
   /// The value of the chart data.
   final double value;
+
+  @override
+  List<Object?> get props => <Object?>[value, color, label];
 }
