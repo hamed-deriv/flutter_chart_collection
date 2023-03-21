@@ -44,6 +44,7 @@ class PieChartPainter extends BaseChartPanePainter {
         .toList();
 
     double currentAngle = startAngle;
+
     for (int i = 0; i < data.length; i++) {
       final Paint arcPaint = Paint()
         ..style = PaintingStyle.stroke
@@ -57,6 +58,32 @@ class PieChartPainter extends BaseChartPanePainter {
         false,
         arcPaint,
       );
+
+      final double angleMiddle = currentAngle + (angles[i] / 2);
+      final double x = centerX + (radius * cos(angleMiddle));
+      final double y = centerY + (radius * sin(angleMiddle));
+
+      final TextSpan span = TextSpan(
+        text: '${data[i].value}',
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 12,
+          fontWeight: FontWeight.bold,
+        ),
+      );
+
+      final TextPainter textPainter = TextPainter(
+        text: span,
+        textAlign: TextAlign.center,
+        textDirection: TextDirection.ltr,
+      );
+
+      textPainter
+        ..layout()
+        ..paint(
+          canvas,
+          Offset(x - (textPainter.width / 2), y - (textPainter.height / 2)),
+        );
 
       currentAngle += angles[i];
     }
