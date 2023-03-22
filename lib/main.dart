@@ -1,5 +1,3 @@
-import 'dart:developer' as developer;
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter_chart_collection/models/base_chart_model.dart';
