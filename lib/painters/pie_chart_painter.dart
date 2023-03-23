@@ -99,7 +99,4 @@ class PieChartPainter extends BaseChartPanePainter {
       currentAngle += angles[i];
     }
   }
-
-  @override
-  bool shouldRepaint(PieChartPainter oldDelegate) => oldDelegate.data != data;
 }

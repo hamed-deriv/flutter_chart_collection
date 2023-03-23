@@ -9,4 +9,8 @@ abstract class BaseChartPanePainter extends CustomPainter {
 
   /// The data to be drawn.
   final List<BaseChartModel> data;
+
+  @override
+  bool shouldRepaint(BaseChartPanePainter oldDelegate) =>
+      oldDelegate.data != data;
 }
